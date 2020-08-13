@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+         width: 650px;
+         height: 500px;
+         margin: 100px auto;
+         
+        }
+        #big{
+            float:left;
+            width: 250px;
+            height: 250px;
+            border: 10px solid black;
+            line-height: 250px;
+            font-size: 25px;
+            text-align: center;
+
+
+
+        }
+        #list{
+            float: right;
+            width: 250px;
+            height: 120px;
+           
+
+        }
+        #list span{
+            display: inline-block;
+            width: 250px;
+            line-height: 120px;
+            font-size: 20px;
+            text-align: center;
+            
+        }
+        #first{
+            background-color: pink;
+        }
+        #second{
+            background-color: skyblue;
+        }
+        #third{
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+    <div id="big">
+    
+    </div>
+    <div id="list">
+        <span id="first">嫩粉色</span>
+        <span id="second">天蓝色</span>
+        <span id="third">黄绿色</span>
+    </div>
+    </div>
+    <script>
+       let big = document.getElementById('big');
+       let first = document.getElementById('first');
+       let second = document.getElementById('second');
+       let third = document.getElementById('third');
+
+       first.onclick = function(){
+           big.style.backgroundColor='pink'
+           big.innerHTML = '?'
+       }
+       second.onclick = function(){
+           big.style.backgroundColor='skyblue'
+           big.innerHTML = '??'
+       }
+       third.onclick = function(){
+           big.style.backgroundColor='green'
+           big.innerHTML = '????'
+       }
+       big.onmouseenter = function(){
+            big.style.backgroundColor='yellow'
+            big.innerHTML = 'sb'
+       }
+    </script>
+ 
+</body>
+
+</html>
