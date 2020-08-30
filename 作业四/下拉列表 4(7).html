@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style-type: none;
+        }
+        a {
+            text-decoration: none;
+        }
+        #list {
+            width: 300px;
+            margin: 50px;
+            font-weight: 700;
+        }
+        #list li{
+            overflow:hidden; 
+            height:40px;
+ 
+        }
+        #list li p.tit{
+            height: 40px;
+            background-color: #000;
+            border-bottom: 1px solid;
+            color: #fff;
+        }
+        #list li p{
+            height: 30px;
+            background-color: #ff0;
+            border-bottom: 1px solid;
+            color: #000;
+        }
+        #list .show {
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="list">
+        <li class="show">
+            <p class="tit">1点击标题</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+        </li>
+        <li >
+            <p class="tit">2点击标题</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+        </li>
+        <li >
+            <p class="tit">3点击标题</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+            <p>朱雀</p>
+        </li>
+    </ul>
+    <script>
+       let aLi = document.querySelectorAll('#list li')
+       let aTit = document.getElementsByClassName('tit')//获取了3个
+       let len = aLi.length;
+       console.log(len);//等于3
+       
+
+    //    for(let i= 0; i<=len-1;i++){
+    //     aTit[i].onclick = function(){
+
+    //         for(let j = 0; j<=len - 1;j++){
+    //             aLi[j].className = ''
+    //         }
+    //         aLi[i].className = 'show'
+    //     }
+    //    }
+        
+
+        // let index = 0;
+        // for(let i = 0; i<=len-1; i++){
+        //     aTit[i].onclick = function(){
+        //          aLi[index].className ='';
+        //          index=i;
+        //          aLi[index].className = 'show'
+        //     }
+        // }
+
+        for(let i =0; i<= len-1;i++){
+            aTit[i].bool = true;//关闭状态 可以被点击打开 给每一个对象 存一下 状态
+            aTit[i].onclick = function(){
+                if(aTit[i].bool){//正关闭 可被打开
+                    aLi[i].className = 'show';
+                    aTit[i].bool = !aTit[i].bool;//false
+                }else{//已打开  可被关闭
+                    aLi[i].className='';
+                    aTit[i].bool = !aTit[i].bool;//true
+                }
+                
+                for(let j=0;j<=len;j++){// 0 1 2 false;
+                    if(j !== i && aTit[j].bool === false){//目的 清空 已经被打开的Li 并且不能 清空 我当前点击的这个Li
+                        aLi[j].className = '';
+                        aTit[j].bool = true;
+                    }
+                    
+            }
+        }}
+    </script>
+ 
+</body>
+
+</html>
