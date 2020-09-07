@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #banner{
+            position: relative;
+            width: 1000px;
+            height: 600px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-repeat:repeat;
+        }
+        #banner ul li{
+            display: none;
+            position: absolute;
+            list-style: none;
+
+        }
+        #banner ul li img{
+            width: 1000px;
+            height: 600px;
+            
+        }
+        #banner p{
+            position: absolute;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            line-height: 25px;
+            text-align: center;
+            color: #fff;
+        }
+
+        #banner p.top{
+            top:0;
+        }
+
+        #banner p.bottom{
+            bottom: 0;
+        }
+        #banner div{
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            margin-top: -15px;
+            background-color: rgba(0,0,0,0.5);
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #banner div.prev{
+            left: 0;
+        }
+        #banner div.next{
+            right: 0;
+        }
+        .btnBar{
+            position: relative;
+            width:600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .btnBar button{
+            padding: 10px;
+            background-color: #ccc;
+            border: 1px solid grey;
+            border-radius: 10px;
+            outline: none;
+            box-shadow: 0 0 20px #ccc inset;
+        }
+        .btnBar button.active{
+            background-color: red;
+            color: #fff;
+        }
+        #banner .show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+
+        <ul>
+            <li class="show">
+                <img src="14.png" alt="">
+            </li>
+            <li>
+                <img src="13.png" alt="">
+            </li>
+            <li>
+                <img src="12.png" alt="">
+            </li>
+            <li>
+                <img src="10.png" alt="">
+            </li>
+            <li>
+                <img src="11.png" alt="">
+            </li>
+        </ul>
+
+        <p class="top">1/5</p>
+        <p class="bottom">日本樱花</p>
+        <div class="prev">&lt</div>
+        <div class="next">&gt</div>
+    </div>
+
+    <div class="btnBar">
+        <button class='active'>正常模式</button>
+        <button >循环模式</button>
+    </div>
+
+    <script>
+       let aBtn = document.querySelectorAll('.btnBar button');
+       let aLi = document.querySelectorAll('#banner li');
+       let oTop = document.getElementsByClassName("top")[0];
+       let oBot = document.getElementsByClassName('bottom')[0];
+       let oPrev = document.getElementsByClassName('prev')[0];
+       let oNext = document.getElementsByClassName('next')[0];
+       let num = 0;//用来标记li的序号
+       let onOff = true; //true代表 正常模式
+       let oldLi = aLi[num];//第一张  标记的是  即将要取消类名的就 Li
+       let arr = ["日本樱花",'夜景','玫瑰','眼睛','H△G']
+
+        aBtn[0].onclick = function(){//正常模式
+            aBtn[0].classList.add('active')//赋予正常按钮类名
+            aBtn[1].classList.remove('active')//取消循环按钮类名
+            onOff = true;//更换开关状态
+        }
+
+
+        aBtn[1].onclick = function(){//循环模式
+            aBtn[1].classList.add('active')
+            aBtn[0].classList.remove('active')
+            onOff = false;
+        }
+
+        
+        oNext.onclick = function(){
+            oldLi.classList.remove('show')//先取消第一张 num=0的那张
+            num++;//num第一次会更新为1 当前图片
+
+            if(num>4){//到序号为4（最后一张）再往下点时
+                if(onOff){//正常模式
+                        num = 4
+                }else{
+                    num=0
+                }
+            }
+
+            oldLi = aLi[num];//是把oldLi  更新为当前的Li
+            aLi[num].classList.add('show');
+
+            oTop.innerHTML = `${num + 1}/5`;
+            oBot.innerHTML = arr[num];
+
+
+        }
+
+        oPrev.onclick = function(){
+            oldLi.classList.remove('show')//先取消第一张 num=0的那张
+            num--;//num第一次会更新为1 当前图片
+
+            if(num<0){//到序号为4（最后一张）再往下点时
+                if(onOff){//正常模式
+                        num = 0
+                }else{
+                    num=4
+                }
+            }
+
+            oldLi = aLi[num];//是把oldLi  更新为当前的Li
+            aLi[num].classList.add('show');
+
+            oTop.innerHTML = `${num + 1}/5`;
+            oBot.innerHTML = arr[num];
+
+
+        }
+
+     
+    </script>
+ 
+</body>
+
+</html>
