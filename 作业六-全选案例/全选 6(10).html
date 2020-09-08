@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 400px;
+            border: 1px solid #ccc;
+            margin: 50px auto ;
+            border-radius: 8px;
+           
+        }
+        #wrap ul {
+            padding:20px 0;
+        }
+        #wrap ul li{
+            list-style: none;
+            padding:10px 20px 10px 60px;
+            line-height: 2.8;
+            border-bottom: 1px solid #ccc;
+            background:url('17.png') no-repeat 15px 21px;
+        }
+
+        #wrap ul li.on{
+            background-image: url('18.png');
+        }
+
+        #wrap p{
+            float: left;
+            padding:20px 40px;
+            line-height: 2.8;
+            border-bottom: 1px solid #ccc;
+            background: url('17.png') no-repeat 11px 28px;
+        }
+        #wrap p.on {
+            background-image: url('18.png');
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul>
+            <li>选择 美丽的朱雀</li>
+            <li>选择 可爱的心艾</li>
+            <li>选择 漂亮的乌拉</li>
+            <li>选择 骚气的风屿</li>
+            <li>选择 老实的小浪</li>
+            <li>选择 一个人单身</li>
+        </ul>
+        <p class="all">
+            全选
+        </p>
+        <p class="allno">
+            全部不选
+        </p>
+        <p class='reverse'>
+            反选
+        </p>
+    </div>
+    <script>
+        let aLi = document.querySelectorAll('#wrap li');
+        let all = document.getElementsByClassName('all')[0]
+        let allno = document.getElementsByClassName('allno')[0]
+        let reverse = document.getElementsByClassName('reverse')[0]
+        let num = 0 ;//标记当前 已被选中的Li 个数
+        let len = aLi.length;
+
+        for(let i = 0; i<len; i++){//for循环就是：1.把开关状态都挂到li上去 2.让每个li都有点击事件
+            aLi[i].onOff = true;//true 代表 可被打开
+
+            aLi[i].onclick = function(){
+                this.classList.toggle('on')//有则删 无则加
+
+                this.onOff? num++ :num--//判断当前开关状态是true 还是false
+
+                this.onOff = !this.onOff;//每次点击  改变开关状态
+
+                judge()
+            }
+        }
+
+        all.onclick = function(){
+            all.classList.add('on');
+            allno.classList.remove('on');
+            reverse.classList.remove('on')
+            num = 6;
+            for(let i = 0;i<len;i++){
+                aLi[i].classList.add('on')
+                aLi[i].onOff = false
+            }
+        }
+
+        allno.onclick = function(){
+            all.classList.remove('on');
+            allno.classList.add('on');
+            reverse.classList.remove('on')
+            num = 0;
+            for(let i = 0;i<len;i++){
+                aLi[i].classList.remove('on')
+                aLi[i].onOff = true;//全不选 要把开关最后置为true
+            }
+        }
+
+        reverse.onclick = function(){
+           reverse.classList.add('on');
+
+            for(let i = 0;i<len;i++){ 
+                aLi[i].classList.toggle('on')//把所有li有on的删掉 没有on的加上
+                if(aLi[i].onOff){//点击之后  需要亮起
+                    num++
+                }else{// 点击  取消对勾
+                    num--
+                } //这里就会得到一个Number值
+                aLi[i].onOff = ! aLi[i].onOff
+            }
+            judge()
+        }
+
+        function judge(){
+            if(num === 6){
+                all.classList.add('on');
+                allno.classList.remove('on')
+            }else if(num === 0){
+                all.classList.remove('on')
+                allno.classList.add('on')
+            }else{
+                all.classList.remove('on')
+                allno.classList.remove('on')
+            }
+
+        }
+    </script>
+ 
+</body>
+
+</html>
