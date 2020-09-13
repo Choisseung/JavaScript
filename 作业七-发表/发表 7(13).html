@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .fl{float: left;}
+        .fr{float: right;}
+
+        #wrap{
+            width: 400px;
+            border: 1px solid #ccc;
+          margin: 50px auto 0;
+        }
+        .topbar{
+            background-color: #eee;
+            padding: 10px;
+            height: 40px;
+
+        }
+        .topbar img{
+            border-radius: 50%;
+        }
+        .topbar span{
+            border-radius: 50%;
+            padding: 8px 12px;
+            background-color: #ccc;
+            color: #fff;
+            line-height: 1;
+        }
+        .topbar .inputText{
+            margin-left: 10px;
+            display:  none;
+        }
+        .topbar .inputText input{
+           width: 200px;
+           line-height: 30px;
+        }
+        .topbar .inputText button{
+            width: 50px;
+            height: 33px;
+        }
+        ul{
+            padding: 10px;
+            min-height: 200px;
+        }
+        ul li{
+            height: 35px;
+            padding: 10px;
+            list-style: none;
+            line-height: 2;
+            border-top: 1px dotted #ccc;
+            margin-top: 30px;
+        }
+        ul li img{
+            float: left;
+            margin: 0 15px;
+        }
+        ul li p{
+            float: left;
+            width: 295px;
+
+        }
+        #wrap ul li img{
+            width: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="topbar">
+            <div class="imgbox fl">
+                <img src="5.png" width='35' alt="">
+            </div>
+            <div class="inputText fl">
+                <input class='fl' type="text" placeholder="请输入内容">
+                <button class="fl">发表</button>
+            </div>
+            <span class="fr">+</span>
+        </div>
+        <ul>
+            
+        </ul>
+    </div>
+    <script>
+        let oImg = document.querySelector(".imgbox img"),
+            oBtn = document.querySelector('.topbar span'),
+            oInputText = document.getElementsByClassName("inputText")[0],
+            oInput = document.querySelector(".inputText input"),
+            oSub = document.querySelector(".inputText button"),
+            oUl = document.getElementsByTagName("ul")[0],
+            onOff = true;
+
+        oImg.onclick = function(){//图片切换
+            if(onOff){//true
+                oImg.src = "6.png"
+            }else{//false
+                oImg.src = "5.png"
+            }
+            onOff = !onOff;
+        }
+        oBtn.onclick = function(){//点击+号出现 输入框
+            oInputText.style.display = "block"
+        }
+
+        oSub.onclick = function(){
+            if(oInput.value === "") return
+            oUl.innerHTML += `<li class="clearfix"><img src="${oImg.src}">
+            <p>${oInput.value}</p></li>`
+            oInput.value=""
+        }
+    </script>
+ 
+</body>
+
+</html>
