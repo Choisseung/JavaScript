@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+.clearfix:after{
+    content:"";
+    display: block;
+    clear: both;
+}
+.fr{
+    float: right;
+}
+.fl{
+    float: right;
+}
+#box{
+    width: 1200px;
+    margin: 50px auto;
+}
+#box table{
+    border: none;
+    width: 100%;
+    border-collapse: collapse;
+}
+#box table tr{
+    border-bottom: 1px solid #ccc;
+}
+#box table tr th{
+    line-height: 45px;
+    background-color: #efefef;
+}
+#box table tr td{
+    width: 25%;
+    font-size: 20px;
+    color: red;
+    text-align: center;
+}
+#box table tr td span{
+    color:#e00;
+}
+#box table tr td input{
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    outline: none;
+}
+#box table tr td button{
+    width: 40px;
+    height: 30px;
+    text-align: center;
+}
+#box table tr td i{
+    font-style: normal;
+}
+#info{
+    padding: 10px;
+    width: 200px;
+}
+#info p em{
+    padding: 0 10px ;
+    font-style: normal;
+    font-size: 20px;
+    color: red;
+}
+        
+    </style>
+</head>
+<body>
+    <div id="box" class="clearfix">
+        <table>
+            <tr>
+                <th>商品</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>小计</th>
+            </tr>
+            <tr>
+                <td class="" width="2">
+                    <img width="60%" src="5.png" alt="">
+                </td>
+                <td class="" width='2'>
+                    <span>8</span>
+                </td>
+                <td class="" width="2">
+                    <p>
+                        <button class="but_1" type="button">-</button>
+                        <input type="text" value="0">
+                        <button class="but_2" type="button">+</button>
+                    </p>
+                </td>
+                <td class="" width='2'>
+                    <i>0</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="" width='2'>
+                    <img width="60%" src="6.png" alt="">
+                </td>
+                <td class="" width="2">
+                    <span>10</span>
+                </td>
+                <td class="" width='2'>
+                    <p>
+                        <button class="but_1" type="button">-</button>
+                        <input type="text" value="0">
+                        <button class="but_2" type="button">+</button>
+                    </p>
+                </td>
+                <td class="" width='2'>
+                    <i>0</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="" width='2'>
+                    <img width="60%" src="7.png" alt="">
+                </td>
+                <td class="" width="2">
+                    <span>12.5</span>
+                </td>
+                <td class="" width='2'>
+                    <p>
+                        <button class="but_1" type="button">-</button>
+                        <input type="text" value="0">
+                        <button class="but_2" type="button">+</button>
+                    </p>
+                </td>
+                <td class="" width='2'>
+                    <i>0</i>
+                </td>
+            </tr>
+            <tr>
+                <td class="" width='2'>
+                    <img width="60%" src="8.png" alt="">
+                </td>
+                <td class="" width="2">
+                    <span>23</span>
+                </td>
+                <td class="" width='2'>
+                    <p>
+                        <button class="but_1" type="button">-</button>
+                        <input type="text" value="0">
+                        <button class="but_2" type="button">+</button>
+                    </p>
+                </td>
+                <td class="" width='2'>
+                    <i>0</i>
+                </td>
+            </tr>
+        </table>
+        <div id="info" class="fr">
+            <p>已选<em>0</em>个</p>
+            <p>已选<em>0</em>￥</p>
+
+        </div>
+    </div>
+    <script>
+        let aPrice = document.querySelectorAll("td span"),
+            aSub = document.getElementsByClassName("but_1"),
+            aNum = document.getElementsByTagName("input"),
+            aAdd = document.getElementsByClassName("but_2"),
+            aMoney = document.querySelectorAll('td i'),
+            numTotal = document.querySelectorAll("#info em")[0],
+            moneyTotal = document.querySelectorAll("#info em")[1],
+            len = aPrice.length;
+
+        for(let i = 0;i<len;i++){//循环注册事件  给每个 + - 都注册上点击事件
+            aAdd[i].onclick = function(){
+                 aNum[i].value++//++会隐式类型转换
+                 aMoney[i].innerHTML = aNum[i].value * aPrice[i].innerHTML 
+                 count()
+            }
+            aSub[i].onclick = function(){//当数目为零时 不能再减了
+                if(aNum[i].value/1 ===0){return}
+                aNum[i].value--
+                aMoney[i].innerHTML = aNum[i].value * aPrice[i].innerHTML
+                count()
+            }
+            aNum[i].oninput = function(){
+                aMoney[i].innerHTML = aNum[i].value * aPrice[i].innerHTML//算单个商品的总价
+                count()
+            }
+        }
+
+        function count(){
+            let num1 = 0 ;
+            let num2 = 0;
+            for(let i = 0;i<len;i++){
+                num1 += aNum[i].value /1;
+               num2 += aMoney[i].innerHTML /1;
+            }
+            numTotal.innerHTML = num1;
+            moneyTotal.innerHTML = num2;
+        }
+
+    </script>
+ 
+</body>
+
+</html>
