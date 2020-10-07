@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #eee;
+        }
+        #wrap{
+            width: 400px;
+            height: 400px;
+            margin: 50px auto;
+            border: 3px solid #ccc;
+            border-radius: 50%;
+            position: relative;
+           
+        }
+        #wrap div{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: absolute;
+        }
+        #wrap img{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            border: 5px solid green;
+            border-radius: 50%;
+        }
+        div{
+          
+          width: 500px;
+          height: 200px;
+          margin: auto;
+          
+          border-radius: 8px;
+          font-size: 25px;
+          text-align: center;
+          line-height: 200px;
+      }
+    </style>
+</head>
+<body>
+    <div>404对不起，你访问的资源不存在</div>
+    <div id="wrap">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <img src="jb/4.jpg" alt="">
+    </div>
+    <script>
+        let oImg = document.getElementsByTagName("img")[0],
+            aDiv = document.querySelectorAll("#wrap div"),
+            R=200,
+            {sin,cos,PI}=Math,//结构赋值
+            deg = 0,//变化的是角度
+            index =0
+
+        function run(){
+            let rad = deg * (PI/180),
+                leftX = R + sin(rad)*R - 30,
+                topY = R -cos(rad)*R - 30;
+            oImg.style.top = topY + 'px'
+            oImg.style.left = leftX + 'px'
+            if(deg % 12 ===0){
+                index = index % aDiv.length
+                //0 1 2 3 4
+                aDiv[index].style.top = topY + 10 + 'px'
+                aDiv[index].style.left = leftX + 10 + 'px'
+                randomColor()
+                index++
+                
+            }
+            deg++
+        }
+
+        setInterval(run,1000 / 60)
+        function randomColor(){//改变的是末尾的div盒子 
+            let r = Math.floor(Math.random()*256)
+            let g = Math.floor(Math.random()*256)
+            let b = Math.floor(Math.random()*256)
+            aDiv[index].style.backgroundColor = `rgb(${r},${g},${b})`
+            oImg.style.borderColor = `rgb(${r},${g},${b})`
+        }
+    </script>
+ 
+</body>
+
+</html>
